@@ -18,17 +18,18 @@ class KNNProcessor:
     @staticmethod
     def load_word_list_object():
         """Pickle word list object to current directory"""
-        if os.path.isfile('./wordlistobject.pickle'):
+        if os.path.isfile('./wordlistobject1.pickle'):
             with open(r"wordlistobject.pickle", "rb") as input_file:
                 print("Log: Unpickling word list object.")
                 return pickle.load(input_file)
         else:
+            print("Log: Word list object not found, creating new word list object.")
             return dataobject.WordListObject.WordListObject()
 
     @staticmethod
     def save_word_list_object(word_list_object):
         """Load word list object from current directory"""
-        with open(r"wordlistobject.pickle", "wb") as output_file:
+        with open(r"wordlistobject1.pickle", "wb") as output_file:
             pickle.dump(word_list_object, output_file)
 
     def __create_document_wordlist(self):
@@ -38,8 +39,11 @@ class KNNProcessor:
         previous_word_list_length = len(word_list)
         for url in self.url_list:
             print(url)
-            self.PCP.change_url(url)
-            word_list = np.append(word_list, self.PCP.get_list_of_words())
+            try:
+                self.PCP.change_url(url)
+                word_list = np.append(word_list, self.PCP.get_list_of_words())
+            except:
+                continue
         print("Log: Done with content of websites.")
         # save process in word list object
         if len(word_list) != previous_word_list_length:
