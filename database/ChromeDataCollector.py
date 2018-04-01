@@ -9,6 +9,7 @@ import Utilities as Util
 
 
 class ChromeDataConnector:
+    """Responsibility: Connects and Queries from Database"""
 
     path_to_db = os.path.expanduser('~') + "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\history"
 

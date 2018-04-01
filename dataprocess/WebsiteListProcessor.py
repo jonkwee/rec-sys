@@ -2,7 +2,7 @@ from collections import defaultdict
 import tldextract
 
 class WebsiteListProcessor:
-
+    """Responsibility: Website Url processor"""
     def __init__(self, web_list):
         self.web_list = web_list
 

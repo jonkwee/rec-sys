@@ -5,15 +5,9 @@ import KMeansProcessor as KNP
 import dataobject.WordListObject
 
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_samples, silhouette_score
-from scipy.spatial.distance import cdist
-import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-import WebsiteListProcessor
-import matplotlib.cm as cm
+
 
 class MainController:
 

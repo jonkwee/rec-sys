@@ -26,7 +26,7 @@ def text_from_html(body):
 
 
 class PageContentProcessor:
-
+    """Responsibility: Process website url and extracting contents"""
     def __init__(self):
         self.url = None
         self.soup = None

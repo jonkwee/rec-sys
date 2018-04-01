@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 class KNNProcessor:
+    """Responsibility: Save & Load DTO Word Object and train KMeans model"""
 
     def __init__(self):
         self.vectorizer = TfidfVectorizer(min_df=1)  # minimum document frequency

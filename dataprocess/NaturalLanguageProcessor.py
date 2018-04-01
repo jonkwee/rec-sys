@@ -3,7 +3,7 @@ import numpy as np
 
 
 class NLProcessor:
-
+    """Responsibility: Filters text data from corpus"""
     def __init__(self):
         self.stopwords = set(stopwords.words("english"))
 
