@@ -20,28 +20,38 @@ class MainController:
     def main(self):
         # get last stored date from pickle object
         stored_date = self.kn_processor.word_list_object.get_stored_date()
+        if stored_date is None:
+            stored_date = dt.datetime.now() - dt.timedelta(days=50)
 
         # get all url from database between time interval
         list_url = self.chrome_data_collector.get_visited_url_interval(stored_date, dt.datetime.now())
 
-        # wlp = WebsiteListProcessor.WebsiteListProcessor(full_list_url)
-        # print(wlp.base_to_extension())
-        self.kn_processor.set_url_list(list_url)
+        # from all urls in database, filter out blacklisted websites
+        wlp = WebsiteListProcessor.WebsiteListProcessor(list_url)
+        wlp.filter_web_list()
+
+        # prepare to train tfidf model with list of url
+        self.kn_processor.set_url_list(wlp.get_web_list())
         array = self.kn_processor.fit_transform()
+
+        # calculate cosine similarity
         cosine_sim_array = cosine_similarity(array)
         distance_array = 1 - cosine_sim_array
 
+        # start kmeans clustering
         centroids = []
         distortion = []
         for i in range(2,20,2):
             kmeans = KMeans(n_clusters=i, random_state=0).fit(distance_array)
             distortion.append(kmeans.inertia_)
             centroids.append(i)
+            ##print(kmeans.cluster_centers_)
 
         plt.xlabel("Number of centroids")
         plt.ylabel("Distortion")
         plt.plot(centroids, distortion)
         plt.show()
+
 
 
 

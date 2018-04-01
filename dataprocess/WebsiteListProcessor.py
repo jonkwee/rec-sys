@@ -4,6 +4,8 @@ import tldextract
 class WebsiteListProcessor:
     """Responsibility: Website Url processor"""
     def __init__(self, web_list):
+        self.blacklisted_domain = ['google', 'youtube', 'office365', 'gmail', 'github', 'taxslayer',
+                                   'office', 'microsoftonline']
         self.web_list = web_list
 
     @staticmethod
@@ -19,4 +21,8 @@ class WebsiteListProcessor:
             return_dict[self.get_base_url(url)].append(url)
         return return_dict
 
+    def filter_web_list(self):
+        self.web_list = [url for url in self.web_list if self.get_base_url(url) not in self.blacklisted_domain]
 
+    def get_web_list(self):
+        return self.web_list
