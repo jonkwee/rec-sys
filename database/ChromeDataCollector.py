@@ -4,8 +4,8 @@ import numpy as np
 import datetime as dt
 from itertools import chain
 
-import SQLStatements
-import Utilities as Util
+import database.SQLStatements as SQLStatements
+import dataprocess.Utilities as Util
 
 
 class ChromeDataConnector:

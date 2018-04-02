@@ -1,7 +1,7 @@
-import ChromeDataCollector
-import NaturalLanguageProcessor
+import controller.ChromeDataCollector as ChromeDataCollector
+import dataprocess.NaturalLanguageProcessor as NaturalLanguageProcessor
 import datetime as dt
-import KMeansProcessor as KNP
+import dataprocess.KMeansProcessor as KNP
 import dataobject.WordListObject
 
 from sklearn.metrics.pairwise import cosine_similarity

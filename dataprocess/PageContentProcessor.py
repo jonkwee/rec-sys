@@ -75,6 +75,9 @@ class PageContentProcessor:
         """Return list of words from website"""
         return np.array(" ".join([w for w in text_from_html(self.content).split() if w.isalpha()]))
 
+    def get_soup_content(self):
+        """Return content with HTML as string"""
+        return self.content
 
 
 
