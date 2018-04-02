@@ -1,7 +1,6 @@
 import sqlite3
 import os
 import database.SQLStatements as SQLStatements
-import controller.test
 import numpy as np
 
 
@@ -46,7 +45,6 @@ class HtmlDatabase:
         all_content = cursor.fetchall()
         result = np.array([])
         for c in all_content:
-            print(c)
             result = np.append(result, c)
         self.close_db_connection(cursor)
         return result

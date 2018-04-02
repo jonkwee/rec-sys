@@ -1,6 +1,11 @@
 from html_similarity import style_similarity, structural_similarity, similarity
 import dataprocess.PageContentProcessor as PCP
-
+import scipy.cluster.hierarchy as hcluster
+import matplotlib.pyplot as plt
+import scipy.spatial.distance as ssd
+import numpy as np
+import database.HtmlDatabase as HtmlDatabase
+import dataprocess.HtmlSimilarityProcessor as HtmlSimilarityProcessor
 # pcp.change_url("https://github.com/TeamHG-Memex/page-compare")
 # content1 = pcp.extract_content()
 # html2 = pcp.get_soup_content()
@@ -9,17 +14,38 @@ import dataprocess.PageContentProcessor as PCP
 # print("structural similarity:", structural_similarity(html1, html2))
 # print("total similarity:", similarity(html1, html2))
 
-def byte_content():
+def byte_content(url):
     pcp = PCP.PageContentProcessor()
-    pcp.change_url("https://docs.python.org/2/library/os.path.html")
+    pcp.change_url(url)
     pcp.change_soup()
     return pcp.get_soup_content()
 
+list_of_urls = [
+    "http://treyhunner.com/2016/04/how-to-loop-with-indexes-in-python/",
+    "https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.nditer.html",
+    "https://stackoverflow.com/questions/29022451/dendrogram-through-scipy-given-a-similarity-matrix?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa",
+    "https://stackoverflow.com/questions/9775297/append-a-numpy-array-to-a-numpy-array",
+    "http://www.numericalexpert.com/blog/sqlite_blob_time/",
+    "https://docs.python.org/2/library/os.path.html",
+    "https://github.com/matiskay/html-similarity"
+]
 
-
-# htmlDB = HtmlDatabase()
+htmlDB = HtmlDatabase.HtmlDatabase()
+htmlsim = HtmlSimilarityProcessor.HtmlSimilarityProcessor(htmlDB)
+htmlsim.hierarchy_clustering()
 # conn = htmlDB.connect_to_db()
 # htmlDB.open_db()
-# cont = controller.test.byte_content()
-# htmlDB.insert_content(cont)
-# l_c = htmlDB.select_all_content()
+# for i in list_of_urls:
+#     cont = byte_content(i)
+#     htmlDB.insert_content(cont)
+# SimMatrix= htmlsim.create_similarity_matrix()
+# SimMatrix = [[ 0.,0.09259259,  0.125     ,  0.        ,  0.08571429],
+#    [ 0.09259259,  0.        ,  0.05555556,  0.        ,  0.05128205],
+#    [ 0.125     ,  0.05555556,  0.        ,  0.03571429,  0.05882353],
+#    [ 0.        ,  0.        ,  0.03571429,  0.        ,  0.        ],
+#    [ 0.08571429,  0.05128205,  0.05882353,  0.        ,  0.        ]]
+#
+# distVec = ssd.squareform(SimMatrix)
+# linkage = hcluster.linkage(1 - distVec)
+# dendro  = hcluster.dendrogram(linkage)
+# plt.show()
