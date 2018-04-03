@@ -35,8 +35,12 @@ class HtmlSimilarityProcessor:
         return np.array(similarity_matrix)
 
     def hierarchy_clustering(self):
+        """Creates hierarchy clustering from similarity matrix"""
         similarity_matrix = self.create_similarity_matrix()
         distVec = ssd.squareform(similarity_matrix)
-        linkage = hcluster.linkage(1 - distVec)
+        linkage = hcluster.linkage(1 - distVec, 'ward')  # Uses Ward variance minimization algorithm
+        print(hcluster.fcluster(linkage, 0.5))  ## finds clusterings using linkage
         dendro = hcluster.dendrogram(linkage)
+        print(linkage)
         plt.show()
+        return dendro

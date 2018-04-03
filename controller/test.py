@@ -27,25 +27,18 @@ list_of_urls = [
     "https://stackoverflow.com/questions/9775297/append-a-numpy-array-to-a-numpy-array",
     "http://www.numericalexpert.com/blog/sqlite_blob_time/",
     "https://docs.python.org/2/library/os.path.html",
-    "https://github.com/matiskay/html-similarity"
+    "https://github.com/matiskay/html-similarity",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html"
 ]
 
 htmlDB = HtmlDatabase.HtmlDatabase()
 htmlsim = HtmlSimilarityProcessor.HtmlSimilarityProcessor(htmlDB)
 htmlsim.hierarchy_clustering()
+
+# insert into database (test)
 # conn = htmlDB.connect_to_db()
 # htmlDB.open_db()
 # for i in list_of_urls:
 #     cont = byte_content(i)
 #     htmlDB.insert_content(cont)
-# SimMatrix= htmlsim.create_similarity_matrix()
-# SimMatrix = [[ 0.,0.09259259,  0.125     ,  0.        ,  0.08571429],
-#    [ 0.09259259,  0.        ,  0.05555556,  0.        ,  0.05128205],
-#    [ 0.125     ,  0.05555556,  0.        ,  0.03571429,  0.05882353],
-#    [ 0.        ,  0.        ,  0.03571429,  0.        ,  0.        ],
-#    [ 0.08571429,  0.05128205,  0.05882353,  0.        ,  0.        ]]
-#
-# distVec = ssd.squareform(SimMatrix)
-# linkage = hcluster.linkage(1 - distVec)
-# dendro  = hcluster.dendrogram(linkage)
-# plt.show()
+
