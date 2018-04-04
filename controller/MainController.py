@@ -1,9 +1,10 @@
-import controller.ChromeDataCollector as ChromeDataCollector
+import database.ChromeDataCollector as ChromeDataCollector
 import dataprocess.NaturalLanguageProcessor as NaturalLanguageProcessor
 import datetime as dt
 import dataprocess.KMeansProcessor as KNP
 import dataobject.WordListObject
 import dataprocess.WebsiteListProcessor as WebsiteListProcessor
+import controller.GoogleSearchController as GoogleSearchController
 
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.cluster import KMeans
@@ -15,6 +16,8 @@ class MainController:
     def __init__(self):
         self.chrome_data_collector = ChromeDataCollector.ChromeDataConnector()
         self.nl_processor = NaturalLanguageProcessor.NLProcessor()
+        self.google_search_controller = GoogleSearchController.GoogleSearchController(
+            self.nl_processor, self.chrome_data_collector)
         self.word_list_object = dataobject.WordListObject.WordListObject()
         self.kn_processor = KNP.KNNProcessor()
 
